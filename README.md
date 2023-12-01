@@ -1,48 +1,69 @@
-Projeto de Geolocalização
+# Projeto de Geolocalização
 
-Bem-vindo ao Projeto de Geolocalização! Este projeto tem como objetivo facilitar o gerenciamento de localizações específicas, conhecidas como "alvos". Aqui está um guia rápido para começar:
+Este é um projeto backend API Django para gerenciamento de alvos (geolocalização).
 
 
-O projeto é dividido em duas partes:
-Backend (Django)
+### Clone o repositório:
 
-O backend é responsável por armazenar, recuperar e gerenciar informações sobre os alvos. Utilizando Django, uma poderosa framework Python, oferece uma API simples para criar, visualizar, atualizar e excluir alvos.
-Como Usar
+    git clone https://github.com/MykleBR/Join-Tecnologia.git
 
-    Clone o repositório.
-    Configure o ambiente virtual e instale as dependências.
-    Inicie o servidor Django.
-    Acesse os endpoints da API para listar, criar, visualizar, atualizar ou excluir alvos.
 
-Frontend (Vue.js)
+## Configuração do Ambiente
 
-O frontend oferece uma interface amigável para interagir com os alvos. Você pode adicionar novos alvos, visualizar a lista existente, editar e até mesmo excluir alvos diretamente no mapa.
-Como Usar
+    Crie e ative um ambiente virtual:
 
-    Clone o repositório.
-    Navegue até o diretório do frontend.
-    Instale as dependências.
-    Inicie o servidor de desenvolvimento.
-    Acesse o frontend em http://localhost:8080/.
+        python -m venv venv
+        Para Linux/Mac = source venv/bin/activate
+        Para Windows = .\venv\Scripts\activate
 
-Como Interagir
 
-    Adicionar um Novo Alvo:
-        Clique no botão "Incluir Novo Alvo" na página principal.
-        Preencha o nome, latitude e longitude no modal que aparece.
-        Clique em "Salvar".
+### Instale as dependências:
+        pip install -r requirements.txt
 
-    Visualizar Alvos:
-        Alvos existentes são marcados no mapa.
-        Clique sobre um marcador para ver mais detalhes.
 
-    Editar Alvos:
-        Clique sobre um marcador existente para abrir o modal de edição.
-        Faça as alterações desejadas e clique em "Salvar".
+### Configuração do Banco de Dados
 
-    Excluir Alvos:
-        Clique sobre um marcador existente para abrir o modal de edição.
-        Clique em "Excluir".
+        Configure as credenciais do banco de dados em settings.py.
 
-Dicas de Desenvolvimento:
-    Utilize o Vue DevTools para facilitar o desenvolvimento e depuração.
+        Execute as migrações:
+            python manage.py migrate
+
+
+### Inicie o servidor Django:
+        python manage.py runserver
+
+
+O servidor estará disponível em http://localhost:8000/.
+
+### Endpoints da API:
+
+        /api/alvos/                         : Lista todos os alvos.
+        /api/alvos/<int:alvo_id>/           : Detalhes de um alvo específico.
+        /api/alvos/cria/                    : Cria um novo alvo.
+        /api/alvos/atualiza/<int:alvo_id>/  : Atualiza um alvo existente.
+        /api/alvos/exclui/<int:alvo_id>/    : Exclui um alvo existente.
+
+
+Exemplos de Uso
+
+
+### Criar um Novo Alvo - POS
+    {"nome": "Novo Alvo", "latitude": 10123, "longitude": -45.678} 
+    http://localhost:8000/api/alvos/cria/
+
+
+### Listar Alvos - GET
+    http://localhost:8000/api/alvos/
+
+
+### Detalhes de um Alvo - GET
+    http://localhost:8000/api/alvos/1/
+
+
+### Atualizar um Alvo - PUT
+    {"nome": "Alvo Atualizado", "latitude": 11.456, "longitude": -46.789} 
+    http://localhost:8000/api/alvos/atualiza/1/
+
+
+### Excluir um Alvo - POST
+    http://localhost:8000/api/alvos/exclui/1/
